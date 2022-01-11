@@ -38,15 +38,62 @@
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
 
+    const fifteen = inventors.filter(inventor => (inventor.year >= 1500 && inventor.year < 1600));
+    //.filter GOES THROUGH AN OBJECT AND TESTS EACH ITEM FOR A CERTAIN TRUE-FALSE REQUIREMENT, returns an OBJECT OF THE ITEMS THAT MATCHED
+    console.table(fifteen);
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
+
+    const fullNames = inventors.map(inventor => inventor.first + ' ' + inventor.last);
+    console.log(fullNames);
+
+    //.map RETURNS AN ARRAY OF VALUES WITH THE SET REQUIREMENTS based on each item in another array
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
 
+    let ordered = inventors.sort(function(firstPerson, secondPerson) {
+      if (firstPerson.year > secondPerson.year) {
+        return 1;
+      } else {
+        return -1;
+      };
+    });
+
+    ordered = inventors.sort((a, b) => a.year > b.year ? 1 : -1)
+
+    console.table(ordered)
+
+    //.sort SORTS ALL ITEMS IN AN ARRAY BASED ON A REQUIREMENT
+
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
 
+    // var totalYears = 0;
+
+    // for (let index = 0; index < inventors.length; index++) {
+    //    totalYears += inventors[index];
+    // };
+
+    // console.log(totalYears);
+
+    // OLD WAY
+
+    // const totalYears = inventors.reduce((total, inventor) => {
+    //   return total + (inventor.passed - inventor.year);
+    // })
+
+    // console.log(totalYears);
+
+    // THIS GIVES YOU A FUNKY OBJECT, code blow ACTUALLY WORKS, because there is no second parameter!
+
+    const totalYears = inventors.reduce((total, inventor) => {
+      return total + (inventor.passed - inventor.year);
+    }, 0)
+
+    //for every inventor in the object, add this certain thing to the total. BETTER THAN FOR LOOPS
+
+    console.log(totalYears);
     // 5. Sort the inventors by years lived
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
